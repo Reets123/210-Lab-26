@@ -1,4 +1,4 @@
-// Lab 25: Data Structures Races 
+// Lab 26: Data Structures Olympics 
 // COMSC-210 - Ibrahim Alatig 
 
 #include <iostream>
@@ -15,6 +15,8 @@ using namespace std;
 using namespace std::chrono;
 
 const int NUM_OF_ELEMENTS = 20000; 
+const int NUM_OF_SIMULATIONS = 15;
+const int NUM_OF_OPERATIONS = 4;
 
 void readData(const string& filename, vector<string>& vec, list<string>& lst, set<string>& st);
 void sortData(vector<string>& vec, list<string>& lst);
@@ -25,6 +27,10 @@ int main() {
     vector<string> dataVector;
     list<string> dataList;
     set<string> dataSet;
+
+    long long timings[NUM_OF_SIMULATIONS][NUM_OF_OPERATIONS] = {0};
+
+    for (int sim = 0; sim < NUM_OF
 
     // Read the data into the data structures
     auto start = high_resolution_clock::now();
