@@ -79,33 +79,12 @@ int main() {
             }
         }
 
-        
+        cout << setw(10) << operationNames[op] 
+             << setw(12) << (sumVector / NUM_OF_SIMULATIONS) 
+             << setw(12) << (sumList / NUM_OF_SIMULATIONS) 
+             << setw(12) << (sumSet / NUM_OF_SIMULATIONS) << endl;
+    }
 
-    // output format setup
-    cout << left << setw(10) << "Operation" << setw(12) << "Vector" << setw(12) << "List" << setw(12) << "Set" << endl;
-    cout << setw(10) << "Read" << setw(12) << duration.count() << setw(12) << duration.count() << setw(12) << duration.count() << endl;
-
-    // sort
-    start = high_resolution_clock::now();
-    sortData(dataVector, dataList);
-    end = high_resolution_clock::now();
-    duration = duration_cast<milliseconds>(end - start);
-    cout << setw(10) << "Sort" << setw(12) << duration.count() << setw(12) << duration.count() << setw(12) << "-1" << endl;
-
-    // value into all three data structures
-    start = high_resolution_clock::now();
-    insertData(dataVector, dataList, dataSet, "TESTCODE");
-    end = high_resolution_clock::now();
-    duration = duration_cast<milliseconds>(end - start);
-    cout << setw(10) << "Insert" << setw(12) << duration.count() << setw(12) << duration.count() << setw(12) << dataSet.count("TESTCODE") << endl;
-
-    // Delete a value from all three data structures
-    start = high_resolution_clock::now();
-    deleteData(dataVector, dataList, dataSet);
-    end = high_resolution_clock::now();
-    duration = duration_cast<milliseconds>(end - start);
-    cout << setw(10) << "Delete" << setw(12) << duration.count() << setw(12) << duration.count() << setw(12) << 0 << endl; 
-    
     return 0;
 }
 
