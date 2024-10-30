@@ -41,6 +41,18 @@ int main() {
         auto end = high_resolution_clock::now();
         timings[sim][0] = duration_cast<milliseconds>(end - start).count();
 
+        // Measure Sort Time
+        start = high_resolution_clock::now();
+        sortData(dataVector, dataList);
+        end = high_resolution_clock::now();
+        timings[sim][1] = duration_cast<milliseconds>(end - start).count();
+
+        // Measure Insert Time
+        start = high_resolution_clock::now();
+        insertData(dataVector, dataList, dataSet, "TESTCODE");
+        end = high_resolution_clock::now();
+        timings[sim][2] = duration_cast<milliseconds>(end - start).count();
+
         
 
     // output format setup
