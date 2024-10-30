@@ -68,18 +68,19 @@ int main() {
     cout << left << setw(10) << "Operation" << setw(12) << "Vector" << setw(12) << "List" << setw(12) << "Set" << endl;
 
     const char* operationNames[] = { "Read", "Sort", "Insert", "Delete" };
+    
     for (int op = 0; op < NUM_OF_OPERATIONS; ++op) {
         long long sumVector = 0, sumList = 0, sumSet = 0;
 
         for (int sim = 0; sim < NUM_OF_SIMULATIONS; ++sim) {
-            sumVector += timings[sim][op];
-            sumList += timings[sim][op];
+            sumVector += timings[sim][op][0]; 
+            sumList += timings[sim][op][0];
 
-            if (op == 2) {
-                sumSet += (dataSet.count("TESTCODE") > 0) ? 1 : 0; 
+            if (op == 2) { // Insert operation
+                sumSet += timings[sim][op][1]; 
             } 
-            else if (op == 3) {
-                sumSet += (dataSet.count("TESTCODE") == 0) ? 1 : 0; 
+            else if (op == 3) { 
+                sumSet += timings[sim][op][1]; 
             }
         }
 
