@@ -53,6 +53,20 @@ int main() {
         end = high_resolution_clock::now();
         timings[sim][2] = duration_cast<milliseconds>(end - start).count();
 
+        // Measure Delete Time
+        start = high_resolution_clock::now();
+        deleteData(dataVector, dataList, dataSet);
+        end = high_resolution_clock::now();
+        timings[sim][3] = duration_cast<milliseconds>(end - start).count(); 
+    }
+
+    cout << "Number of simulations: " << NUM_OF_SIMULATIONS << endl;
+    cout << left << setw(10) << "Operation" << setw(12) << "Vector" << setw(12) << "List" << setw(12) << "Set" << endl;
+
+    const char* operationNames[] = { "Read", "Sort", "Insert", "Delete" };
+    for (int op = 0; op < NUM_OF_OPERATIONS; ++op) {
+        long long sumVector = 0,
+
         
 
     // output format setup
