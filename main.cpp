@@ -30,13 +30,18 @@ int main() {
 
     long long timings[NUM_OF_SIMULATIONS][NUM_OF_OPERATIONS] = {0};
 
-    for (int sim = 0; sim < NUM_OF
+    for (int sim = 0; sim < NUM_OF_SIMULATIONS; ++sim) {
+        dataVector.clear();
+        dataList.clear();
+        dataSet.clear();
 
-    // Read the data into the data structures
-    auto start = high_resolution_clock::now();
-    readData("codes.txt", dataVector, dataList, dataSet);
-    auto end = high_resolution_clock::now();
-    auto duration = duration_cast<milliseconds>(end - start);
+        // measure read time
+        auto start = high_resolution_clock::now();
+        readData("codes.txt", dataVector, dataList, dataSet);
+        auto end = high_resolution_clock::now();
+        timings[sim][0] = duration_cast<milliseconds>(end - start).count();
+
+        
 
     // output format setup
     cout << left << setw(10) << "Operation" << setw(12) << "Vector" << setw(12) << "List" << setw(12) << "Set" << endl;
