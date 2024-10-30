@@ -23,6 +23,7 @@ void sortData(vector<string>& vec, list<string>& lst);
 void insertData(vector<string>& vec, list<string>& lst, set<string>& st, const string& value);
 void deleteData(vector<string>& vec, list<string>& lst, set<string>& st);
 
+// main method
 int main() {
     vector<string> dataVector;
     list<string> dataList;
