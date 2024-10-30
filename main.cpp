@@ -29,14 +29,14 @@ int main() {
     list<string> dataList;
     set<string> dataSet;
 
-    long long timings[NUM_OF_SIMULATIONS][NUM_OF_OPERATIONS][2] = {{{0}}};
+    long long timings[NUM_OF_SIMULATIONS][NUM_OF_OPERATIONS][3] = {{{0}}}; // Third dimension to hold counter variables
 
     for (int sim = 0; sim < NUM_OF_SIMULATIONS; ++sim) {
         dataVector.clear();
         dataList.clear();
         dataSet.clear();
 
-        // measure read time
+        // Measure read time
         auto start = high_resolution_clock::now();
         readData("codes.txt", dataVector, dataList, dataSet);
         auto end = high_resolution_clock::now();
@@ -52,16 +52,15 @@ int main() {
         start = high_resolution_clock::now();
         insertData(dataVector, dataList, dataSet, "TESTCODE");
         end = high_resolution_clock::now();
-         timings[sim][2][0] = duration_cast<milliseconds>(end - start).count();
+        timings[sim][2][0] = duration_cast<milliseconds>(end - start).count();
+        timings[sim][2][1] = (dataSet.count("TESTCODE") > 0) ? 1 : 0; // Size of the Set after insertion
 
         // Measure Delete Time
         start = high_resolution_clock::now();
         deleteData(dataVector, dataList, dataSet);
         end = high_resolution_clock::now();
         timings[sim][3][0] = duration_cast<milliseconds>(end - start).count();
-
-        timings[sim][2][1] = (dataSet.count("TESTCODE") > 0) ? 1 : 0;
-        timings[sim][3][1] = (dataSet.count("TESTCODE") == 0) ? 1 : 0;
+        timings[sim][3][1] = (dataSet.count("TESTCODE") == 0) ? 1 : 0; // Size of the Set after deletion
     }
 
     cout << "Number of simulations: " << NUM_OF_SIMULATIONS << endl;
@@ -76,10 +75,10 @@ int main() {
             sumVector += timings[sim][op][0]; 
             sumList += timings[sim][op][0];
 
-            if (op == 2) { // Insert operation
+            if (op == 2) { // Insert operation, relevant values are in [2][1]
                 sumSet += timings[sim][op][1]; 
             } 
-            else if (op == 3) { 
+            else if (op == 3) { // Delete operation, relevant values are in [3][1]
                 sumSet += timings[sim][op][1]; 
             }
         }
