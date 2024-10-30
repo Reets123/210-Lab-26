@@ -29,7 +29,7 @@ int main() {
     list<string> dataList;
     set<string> dataSet;
 
-    long long timings[NUM_OF_SIMULATIONS][NUM_OF_OPERATIONS] = {0};
+    long long timings[NUM_OF_SIMULATIONS][NUM_OF_OPERATIONS][2] = {{{0}}};
 
     for (int sim = 0; sim < NUM_OF_SIMULATIONS; ++sim) {
         dataVector.clear();
@@ -40,25 +40,28 @@ int main() {
         auto start = high_resolution_clock::now();
         readData("codes.txt", dataVector, dataList, dataSet);
         auto end = high_resolution_clock::now();
-        timings[sim][0] = duration_cast<milliseconds>(end - start).count();
+        timings[sim][0][0] = duration_cast<milliseconds>(end - start).count(); 
 
         // Measure Sort Time
         start = high_resolution_clock::now();
         sortData(dataVector, dataList);
         end = high_resolution_clock::now();
-        timings[sim][1] = duration_cast<milliseconds>(end - start).count();
+        timings[sim][1][0] = duration_cast<milliseconds>(end - start).count();
 
         // Measure Insert Time
         start = high_resolution_clock::now();
         insertData(dataVector, dataList, dataSet, "TESTCODE");
         end = high_resolution_clock::now();
-        timings[sim][2] = duration_cast<milliseconds>(end - start).count();
+         timings[sim][2][0] = duration_cast<milliseconds>(end - start).count();
 
         // Measure Delete Time
         start = high_resolution_clock::now();
         deleteData(dataVector, dataList, dataSet);
         end = high_resolution_clock::now();
-        timings[sim][3] = duration_cast<milliseconds>(end - start).count(); 
+        timings[sim][3][0] = duration_cast<milliseconds>(end - start).count();
+
+        timings[sim][2][1] = (dataSet.count("TESTCODE") > 0) ? 1 : 0;
+        timings[sim][3][1] = (dataSet.count("TESTCODE") == 0) ? 1 : 0;
     }
 
     cout << "Number of simulations: " << NUM_OF_SIMULATIONS << endl;
