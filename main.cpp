@@ -65,7 +65,19 @@ int main() {
 
     const char* operationNames[] = { "Read", "Sort", "Insert", "Delete" };
     for (int op = 0; op < NUM_OF_OPERATIONS; ++op) {
-        long long sumVector = 0,
+        long long sumVector = 0, sumList = 0, sumSet = 0;
+
+        for (int sim = 0; sim < NUM_OF_SIMULATIONS; ++sim) {
+            sumVector += timings[sim][op];
+            sumList += timings[sim][op];
+
+            if (op == 2) {
+                sumSet += (dataSet.count("TESTCODE") > 0) ? 1 : 0; 
+            } 
+            else if (op == 3) {
+                sumSet += (dataSet.count("TESTCODE") == 0) ? 1 : 0; 
+            }
+        }
 
         
 
